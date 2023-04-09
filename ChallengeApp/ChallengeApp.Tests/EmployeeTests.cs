@@ -1,41 +1,44 @@
-namespace ChallengeApp.Tests
+ï»¿namespace ChallengeApp.Tests
 {
-    public class Tests
+    public class EmployeeTests
     {
         [Test]
-        public void WhenEmployeeCollectTwoPositiveScores_ShouldReturnCorrectResult()
+        public void GetStatisticsShouldReturnCorrectMax()
         {
-            var employee = new Employee("Karol", "Ma³ysz", 33);
-            employee.AddScore(1);
-            employee.AddScore(12);
+            var employee = new Employee("Kinga", "Rak");
 
-            var result = employee.Result;
+            employee.AddGrade(3);
+            employee.AddGrade(2);
 
-            Assert.AreEqual(13, result);
+            var statistics = employee.GetStatistics();
+
+            Assert.AreEqual(3, statistics.Max);
         }
 
         [Test]
-        public void WhenEmployeeCollectTwoNegativeScores_ShouldReturnCorrectResult()
+        public void GetStatisticsShouldReturnCorrectMin()
         {
-            var employee = new Employee("Karol", "Ma³ysz", 33);
-            employee.AddScore(-5);
-            employee.AddScore(-5);
+            var employee = new Employee("Kinga", "Rak");
 
-            var result = employee.Result;
+            employee.AddGrade(3);
+            employee.AddGrade(2);
 
-            Assert.AreEqual(-10, result);
+            var statistics = employee.GetStatistics();
+
+            Assert.AreEqual(2, statistics.Min);
         }
 
         [Test]
-        public void WhenEmployeeCollectNegativeAndPositiveScores_ShouldReturnCorrectResult()
+        public void GetStatisticsShouldReturnCorrectAverageValue()
         {
-            var employee = new Employee("Karol", "Ma³ysz", 33);
-            employee.AddScore(-5);
-            employee.AddScore(10);
+            var employee = new Employee("Kinga", "Rak");
 
-            var result = employee.Result;
+            employee.AddGrade(3);
+            employee.AddGrade(2);
 
-            Assert.AreEqual(5, result);
+            var statistics = employee.GetStatistics();
+
+            Assert.AreEqual(Math.Round(2.5, 2), Math.Round(statistics.Average, 2));
         }
     }
 }
