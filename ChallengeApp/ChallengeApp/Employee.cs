@@ -3,7 +3,8 @@
     public class Employee
     {
 
-        private List<int> score = new List<int>();
+        private List<int> positiveScore = new List<int>();
+        private List<int> negativeScore = new List<int>();
 
         public Employee()
         {
@@ -43,14 +44,26 @@
         {
             get
             {
-                return this.score.Sum();
+                var sumPositiveScore = this.positiveScore.Sum();
+                var sumNegativeScore = this.negativeScore.Sum();
+                var result = sumPositiveScore + sumNegativeScore;
+                return result;
             }
         }
 
         public void AddScore(int score)
         {
-            this.score.Add(score);
+            if (score >= 0)
+            {
+                this.positiveScore.Add(score);
+            }
+            else 
+            {
+                this.negativeScore.Add(score);
+            }
+
         }
+
 
     }
 }
