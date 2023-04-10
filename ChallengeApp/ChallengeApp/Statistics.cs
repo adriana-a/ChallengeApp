@@ -8,5 +8,6 @@
 
         public float Average { get; set; }
 
+        public char AverageAsLetter { get; set; }
     }
 }
