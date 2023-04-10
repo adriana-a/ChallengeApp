@@ -25,7 +25,36 @@
             {
                 Console.WriteLine("Podaj liczbę od 0 do 100");
             }
+        }
 
+        public void AddGrade(double grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
+        public void AddGrade(int grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
+        public void AddGrade(decimal grade)
+        {
+            float gradeAsFloat = (float)grade;
+            this.AddGrade(gradeAsFloat);
+        }
+
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))
+            {
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("Podaj liczbę, a nie słowo");
+            }
         }
 
         public Statistics GetStatistics()
