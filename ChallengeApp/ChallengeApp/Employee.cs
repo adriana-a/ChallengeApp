@@ -1,24 +1,27 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
 
         private List<float> grades = new List<float>();
 
         public Employee()
+            : this("no name", "no surname")
         {
         }
+
+
         public Employee(string name, string surname)
+            : base(name, surname, '?')
         {
-            this.Name = name;
-            this.Surname = surname;
         }
 
-        public string Name { get; private set; }
+        public Employee(string name, string surname, char sex)
+            : base(name, surname, sex)
+        {
+        }
 
-        public string Surname { get; private set; }
+
 
         public void AddGrade(float grade)
         {
@@ -28,7 +31,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("Failure. Write number between 0 - 100");
+                throw new Exception("Failure. Number is not between 0 - 100");
             }
         }
 
@@ -80,8 +83,7 @@ namespace ChallengeApp
                     break;
 
                 default:
-                    Console.WriteLine("Failure. Write letter between A - E");
-                    break;
+                    throw new Exception("Failure. Letter is not between A - E");
             }
         }
 
@@ -91,15 +93,15 @@ namespace ChallengeApp
             {
                 this.AddGrade(result);
             }
-            else if (grade.Length ==1)
+            else if (grade.Length == 1)
             {
                 AddGrade(Convert.ToChar(grade));
             }
             else
             {
-                Console.WriteLine("Failure. Write number or letter between A - E");
+                throw new Exception("Failure. Its is not a number or letter between A - E");
             }
-           
+
         }
 
         public Statistics GetStatistics()
