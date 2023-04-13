@@ -1,6 +1,6 @@
 ﻿namespace ChallengeApp
 {
-    public class Employee : Person
+    public class Employee : IEmployee
     {
 
         private List<float> grades = new List<float>();
@@ -12,15 +12,19 @@
 
 
         public Employee(string name, string surname)
-            : base(name, surname, '?')
         {
+            this.Name = name;
+            this.Surname = surname;
         }
 
-        public Employee(string name, string surname, char sex)
-            : base(name, surname, sex)
-        {
-        }
+        //public Employee(string name, string surname, char sex)
+        //    : base(name, surname, sex)
+        //{
+        //}
 
+        public string Name { get; private set; }
+
+        public string Surname { get; private set; }
 
 
         public void AddGrade(float grade)
@@ -53,49 +57,44 @@
             this.AddGrade(gradeAsFloat);
         }
 
-        public void AddGrade(char grade)
-        {
-            switch (grade)
-            {
-                case 'A':
-                case 'a':
-                    this.grades.Add(100);
-                    break;
-
-                case 'B':
-                case 'b':
-                    this.grades.Add(80);
-                    break;
-
-                case 'C':
-                case 'c':
-                    this.grades.Add(60);
-                    break;
-
-                case 'D':
-                case 'd':
-                    this.grades.Add(40);
-                    break;
-
-                case 'E':
-                case 'e':
-                    this.grades.Add(20);
-                    break;
-
-                default:
-                    throw new Exception("Failure. Letter is not between A - E");
-            }
-        }
-
         public void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
             {
                 this.AddGrade(result);
             }
-            else if (grade.Length == 1)
+            else if (char.TryParse(grade, out char gradeAsChar))
             {
-                AddGrade(Convert.ToChar(grade));
+                switch (gradeAsChar)
+                {
+                    case 'A':
+                    case 'a':
+                        this.AddGrade(100);
+                        break;
+
+                    case 'B':
+                    case 'b':
+                        this.AddGrade(80);
+                        break;
+
+                    case 'C':
+                    case 'c':
+                        this.AddGrade(60);
+                        break;
+
+                    case 'D':
+                    case 'd':
+                        this.AddGrade(40);
+                        break;
+
+                    case 'E':
+                    case 'e':
+                        this.AddGrade(20);
+                        break;
+
+                    default:
+                        throw new Exception("Failure. Letter is not between A - E");
+                }
             }
             else
             {
