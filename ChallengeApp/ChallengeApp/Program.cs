@@ -4,8 +4,21 @@ Console.WriteLine("Hello! You can collect grades of your employees and superviso
 Console.WriteLine("----------------------------------------------------------------------------------");
 Console.WriteLine();
 
-var employee = new Employee();
+var employee = new EmployeeInFile("Adriana", "Kopeć");
+var employee2 = new EmployeeInMemory();
 var supervisor = new Supervisor();
+
+employee.GradeAdded += EmployeeGradeAdded;
+employee2.GradeAdded += EmployeeGradeAdded;
+
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("New grade is added");
+}
+Console.WriteLine("First grade from EmployeeInMemory without ReadLine:");
+employee2.AddGrade(7);
+
+Console.WriteLine();
 
 while (true)
 {
@@ -26,7 +39,7 @@ while (true)
     catch (Exception e)
     {
         Console.WriteLine($"Exception is catched: {e}");
-    }   
+    }
 }
 
 while (true)
@@ -58,6 +71,6 @@ Console.WriteLine($"The lowest grade of your employee is:{statisticsEmployee.Min
 
 Console.WriteLine("=======================================================");
 
-Console.WriteLine($"Average grade of your employee is:{statisticsSupervisor.Average} ({statisticsSupervisor.AverageAsLetter})");
-Console.WriteLine($"The highest grade of your employee is:{statisticsSupervisor.Max}");
-Console.WriteLine($"The lowest grade of your employee is:{statisticsSupervisor.Min}");
+Console.WriteLine($"Average grade of your supervisor is:{statisticsSupervisor.Average} ({statisticsSupervisor.AverageAsLetter})");
+Console.WriteLine($"The highest grade of your supervisor is:{statisticsSupervisor.Max}");
+Console.WriteLine($"The lowest grade of your supervisor is:{statisticsSupervisor.Min}");
